@@ -5,6 +5,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
@@ -12,6 +15,8 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
+    private AnimalAdapter adapter;
+    private AnimalGenerator generator = new AnimalGenerator();
     private static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
@@ -20,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        initList();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -80,5 +87,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         Log.d(TAG, "onDestroy");
         super.onDestroy();
+    }
+
+    private void initList(){
+
+        RecyclerView rvAnimals = findViewById(R.id.rvAnimal);
+        rvAnimals.setHasFixedSize(true);
+        rvAnimals.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new AnimalAdapter(generator.getAnimals(10));
+        rvAnimals.setAdapter(adapter);
     }
 }
