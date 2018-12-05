@@ -33,4 +33,7 @@ public class AnimalGenerator {
         }
         return animals;
     }
+    public String getAvatarLink(){
+        return images[random.nextInt(images.length)];
+    }
 }
