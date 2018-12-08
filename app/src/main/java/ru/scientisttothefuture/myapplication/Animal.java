@@ -2,15 +2,23 @@ package ru.scientisttothefuture.myapplication;
 
 import java.util.Objects;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "animals")
 public class Animal {
+    @PrimaryKey(autoGenerate = true)
     private long id;
     private String name;//имя животного
     private String location;//место
     private String path;//картинка
 
+    @Ignore
     public Animal(String name, String location, String path) {
         this(0,name, location, path);
     }
+
     public Animal(long id, String name, String location, String path) {
         this.id = id;
         this.name = name;

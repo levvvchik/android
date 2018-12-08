@@ -63,9 +63,8 @@ public class AddAnimal extends AppCompatActivity {
         if (item.getItemId() == R.id.actionAdd) {
             String name = tilName.getEditText().getText().toString();
             String location = tilLocation.getEditText().getText().toString();
-            SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy HH:mm"); // e.g. 24.10.2018 15:46
             Animal animal = new Animal(name, avatarLink, location);
-            AppDatabase.getInstance(this).personDao().insertPerson(animal);
+            AppDatabase.getInstance(this).animalDao().insertAnimal(animal);
             finish();
             return true;
         } else {
