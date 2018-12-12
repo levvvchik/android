@@ -13,6 +13,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,30 +40,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-    @Override
     protected void onStart() {
         super.onStart();
         Log.d(TAG, "onStart");
+        updateList();
     }
 
     @Override
@@ -86,13 +69,20 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onDestroy");
         super.onDestroy();
     }
+    private void updateList() {
+        List<Animal> animals = AppDatabase.getInstance(this).animalDao().getAll();
+        adapter.update(animals);
+    }
 
     private void initList(){
 
         RecyclerView rvAnimals = findViewById(R.id.rvAnimal);
         rvAnimals.setHasFixedSize(true);
         rvAnimals.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new AnimalAdapter(generator.getAnimals(10));
+        List<Animal> animals = AppDatabase.getInstance(this).animalDao().getAll();
+        adapter = new AnimalAdapter(animals,item -> {
+            Toast.makeText(this, item.getName(), Toast.LENGTH_LONG).show();
+        });
         rvAnimals.setAdapter(adapter);
     }
 }

@@ -63,7 +63,7 @@ public class AddAnimal extends AppCompatActivity {
         if (item.getItemId() == R.id.actionAdd) {
             String name = tilName.getEditText().getText().toString();
             String location = tilLocation.getEditText().getText().toString();
-            Animal animal = new Animal(name, avatarLink, location);
+            Animal animal = new Animal(name, location, avatarLink);
             AppDatabase.getInstance(this).animalDao().insertAnimal(animal);
             finish();
             return true;

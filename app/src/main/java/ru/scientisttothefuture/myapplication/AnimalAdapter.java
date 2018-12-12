@@ -14,11 +14,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalViewHolder> {
+    private OnItemClickListener itemClickListener;
 
     List<Animal> animals;
 
-    public AnimalAdapter(List<Animal> animals) {
+    public AnimalAdapter(List<Animal> animals, OnItemClickListener itemClickListener) {
         this.animals = animals;
+        this.itemClickListener = itemClickListener;
     }
 
     @NonNull
@@ -30,9 +32,17 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalView
 
     @Override
     public void onBindViewHolder(@NonNull AnimalViewHolder holder, int position) {
-        holder.bind(animals.get(position));
+        holder.bind(animals.get(position), itemClickListener);
+    }
+    public void update(List<Animal> animals){
+        this.animals.clear();
+        this.animals.addAll(animals);
+        notifyDataSetChanged();
     }
 
+    public interface OnItemClickListener {
+        void onItemClick(Animal item);
+    }
     @Override
     public int getItemCount() {
         return animals.size();
@@ -51,7 +61,10 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalView
             tvLocation = itemView.findViewById(R.id.tvLocation);
         }
 
-        public void bind(Animal animal) {
+        public void bind(Animal animal, final OnItemClickListener itemClickListener) {
+
+            itemView.setOnClickListener(v -> itemClickListener.onItemClick(animal));
+
             tvName.setText(animal.getName());
             tvLocation.setText(animal.getLocation());
             Picasso.get().load(animal.getPath())
