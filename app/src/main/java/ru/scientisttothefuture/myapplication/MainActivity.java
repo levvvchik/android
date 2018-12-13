@@ -6,6 +6,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -78,7 +79,9 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView rvAnimals = findViewById(R.id.rvAnimal);
         rvAnimals.setHasFixedSize(true);
+
         rvAnimals.setLayoutManager(new LinearLayoutManager(this));
+        rvAnimals.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         List<Animal> animals = AppDatabase.getInstance(this).animalDao().getAll();
         adapter = new AnimalAdapter(animals,item -> {
             final Intent intent = AnimalActivity_details.getStartIntent(this, item.getId());
