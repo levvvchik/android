@@ -81,7 +81,9 @@ public class MainActivity extends AppCompatActivity {
         rvAnimals.setLayoutManager(new LinearLayoutManager(this));
         List<Animal> animals = AppDatabase.getInstance(this).animalDao().getAll();
         adapter = new AnimalAdapter(animals,item -> {
-            Toast.makeText(this, item.getName(), Toast.LENGTH_LONG).show();
+            final Intent intent = AnimalActivity_details.getStartIntent(this, item.getId());
+            startActivity(intent);
+
         });
         rvAnimals.setAdapter(adapter);
     }
