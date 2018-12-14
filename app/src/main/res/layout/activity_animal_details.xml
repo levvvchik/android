@@ -10,7 +10,7 @@
         android:id="@+id/ivAvatar"
         android:layout_width="184dp"
         android:layout_height="156dp"
-        android:layout_marginTop="82dp"
+        android:layout_marginTop="68dp"
         android:layout_marginEnd="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -19,12 +19,13 @@
     <TextView
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
-        android:layout_height="47dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="20dp"
         android:text="TextView"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="@+id/ivAvatar"
+        android:textAlignment="textEnd"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="50sp"
+        app:layout_constraintEnd_toEndOf="@+id/ivAvatar"
         app:layout_constraintTop_toBottomOf="@+id/ivAvatar"
         tools:text="name" />
 
@@ -32,10 +33,12 @@
         android:id="@+id/tvLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="28dp"
         android:text="TextView"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="@+id/tvName"
+        android:textAlignment="textEnd"
+        android:textColor="@color/colorPrimary"
+        android:textSize="35sp"
+        app:layout_constraintEnd_toEndOf="@+id/ivAvatar"
         app:layout_constraintTop_toBottomOf="@+id/tvName"
         tools:text="location" />
 </androidx.constraintlayout.widget.ConstraintLayout>
